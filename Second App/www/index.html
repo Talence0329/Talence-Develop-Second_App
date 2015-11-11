@@ -36,6 +36,15 @@
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
+			<form id="default_form" name="default_form">
+				<div>
+					<input id="tb_word" name="tb_word" type="text" value="Second Test 2"/>
+					<input id="bt_send" name="bt_send" type="button" value="Send Button" onclick="form_submit();"/>
+					<span id="alpha"></span><br/>
+					<span id="beta"></span><br/>
+					<span id="gamma"></span><br/>
+				</div>
+			</form>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -44,3 +53,42 @@
         </script>
     </body>
 </html>
+<script>
+	$(document).ready(function(){
+	
+		alert("Talence take off second.");
+		
+		var parentElement = document.getElementById('deviceready');
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+	});
+	function form_submit(){
+		alert("Send");
+	}
+	
+	window.addEventListener('deviceorientation', function(event) {
+		  var alpha = event.alpha;
+		  var beta = event.beta;
+		  var gamma = event.gamma;
+		}, false);
+		if(window.DeviceOrientationEvent) {
+		window.addEventListener('deviceorientation', function(event) {
+	  var a = document.getElementById('alpha',
+			  b = document.getElementById('beta'),
+			  g = document.getElementById('gamma'),
+			  alpha = event.alpha,
+			  beta = event.beta,
+				  gamma = event.gamma;
+
+	  a.innerHTML = Math.round(alpha);
+	  b.innerHTML = Math.round(beta);
+	  g.innerHTML = Math.round(gamma);
+
+		}, false);
+	}else{
+		document.querySelector('body').innerHTML = '你的瀏覽器不支援喔';
+	}
+	
+</script>
